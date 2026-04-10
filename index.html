@@ -869,7 +869,7 @@
                                 <td class="p-4 font-mono text-cyan-400">13.04.</td>
                                 <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-red-400" title="Vor Ort" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></td>
                                 <td class="p-4 font-bold text-white">Kennenlernen, Einführung und Gruppeneinteilung</td>
-                                <td class="p-4 text-gray-400">Kennenlernen, Einführung und Gruppeneinteilung.</td>
+                                <td class="p-4 text-gray-400">Intro durch Prof. & brainLight. Bildung von Gruppe A & B. Rollenverteilung.</td>
                             </tr>
                             <!-- 20.04. -->
                             <tr class="hover:bg-slate-800/30 transition-colors">
@@ -1052,6 +1052,40 @@
         });
         
         updateSlides();
+
+        // --- VUCA Interaction Logic ---
+        function showVuca(type) {
+            const vucaImage = document.getElementById('vuca-image');
+            const vucaTexts = document.getElementById('vuca-texts');
+            if (vucaImage) {
+                vucaImage.classList.remove('opacity-100');
+                vucaImage.classList.add('opacity-0');
+            }
+            if (vucaTexts) {
+                vucaTexts.classList.remove('opacity-0');
+                vucaTexts.classList.add('opacity-100');
+            }
+            
+            ['volatility', 'uncertainty', 'complexity', 'ambiguity'].forEach(t => {
+                const textEl = document.getElementById(`text-${t}`);
+                if(textEl) textEl.classList.add('hidden');
+            });
+            const activeEl = document.getElementById(`text-${type}`);
+            if(activeEl) activeEl.classList.remove('hidden');
+        }
+
+        function hideVuca() {
+            const vucaImage = document.getElementById('vuca-image');
+            const vucaTexts = document.getElementById('vuca-texts');
+            if (vucaImage) {
+                vucaImage.classList.remove('opacity-0');
+                vucaImage.classList.add('opacity-100');
+            }
+            if (vucaTexts) {
+                vucaTexts.classList.remove('opacity-100');
+                vucaTexts.classList.add('opacity-0');
+            }
+        }
 
         // --- ICS Calendar Export Logic ---
         function downloadICS() {
