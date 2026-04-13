@@ -1,738 +1,2249 @@
 <!DOCTYPE html>
+
 <html lang="de">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Project FlowForward - Gesunde Organisationsentwicklung</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
         
+
         body {
+
             font-family: 'Montserrat', sans-serif;
+
             background-color: #020617;
+
             color: #f8fafc;
+
             overflow: hidden;
+
             margin: 0;
+
         }
+
         
+
         .slide {
+
             position: absolute;
+
             top: 0;
+
             left: 0;
+
             width: 100vw;
+
             height: 100vh;
+
             opacity: 0;
+
             visibility: hidden;
+
             transition: opacity 0.6s ease-in-out, visibility 0.6s;
+
             display: flex;
+
             flex-direction: column;
-            align-items: center; 
+
+            align-items: center; /* Center horizontally */
+
         }
+
         
+
         .slide.active {
+
             opacity: 1;
+
             visibility: visible;
+
             z-index: 10;
+
         }
+
 
         .slide.active .fade-up {
+
             animation: fadeUpAnim 0.8s ease-out forwards;
+
         }
+
         
+
         @keyframes fadeUpAnim {
+
             from { opacity: 0; transform: translateY(40px); }
+
             to { opacity: 1; transform: translateY(0); }
+
         }
+
 
         .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+
         .text-gradient { background: linear-gradient(to right, #22d3ee, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
         
+
         /* VUCA Interactive Styles */
+
         .vuca-trigger {
+
             cursor: crosshair;
+
             transition: color 0.3s ease, transform 0.3s ease;
+
         }
+
         .vuca-trigger:hover {
+
             color: #22d3ee;
+
             transform: translateX(10px);
+
         }
+
 
         /* Handelsblatt Card Style */
+
         .white-card {
+
             background-color: #ffffff;
+
             color: #1a1a1a;
+
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
             border-radius: 24px;
+
         }
+
         .newspaper-scroll {
+
             scrollbar-width: thin;
+
             scrollbar-color: #ee7d00 #f4f1ea;
+
         }
+
         .newspaper-scroll::-webkit-scrollbar { width: 6px; }
+
         .newspaper-scroll::-webkit-scrollbar-thumb { background-color: #ee7d00; border-radius: 10px; }
+
         .hb-orange { color: #ee7d00; }
 
+
         /* Dark Scrollbar for Timeline */
+
         .dark-scroll {
+
             scrollbar-width: thin;
+
             scrollbar-color: #06b6d4 transparent;
+
         }
+
         .dark-scroll::-webkit-scrollbar { width: 6px; }
+
         .dark-scroll::-webkit-scrollbar-track { background: transparent; }
+
         .dark-scroll::-webkit-scrollbar-thumb { background-color: #06b6d4; border-radius: 10px; }
 
+
         /* Custom Citation Link Style */
+
         .cite-link {
+
             font-size: 0.6em;
+
             vertical-align: super;
+
             color: #38bdf8;
+
             text-decoration: none;
+
             cursor: pointer;
+
             margin-left: 2px;
+
             transition: color 0.2s;
+
         }
+
         .cite-link:hover { color: #bae6fd; text-decoration: underline; }
 
+
         /* Progress Bar */
+
         #progress-container {
+
             position: fixed;
+
             bottom: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 4px;
+
             background-color: rgba(255,255,255,0.1);
+
             z-index: 100;
+
         }
+
         #progress-bar {
+
             height: 100%;
+
             background-color: #06b6d4;
+
             width: 0%;
+
             transition: width 0.4s ease-out;
+
             box-shadow: 0 0 10px #06b6d4;
+
         }
+
 
         /* Method Tooltips */
+
         .method-item .tooltip { display: none; }
+
         .method-item:hover .tooltip { display: block; animation: fadeIn 0.3s forwards;}
+
     </style>
+
 </head>
+
 <body class="selection:bg-cyan-500 selection:text-white">
 
+
     <div class="fixed inset-0 z-0 pointer-events-none">
+
         <div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 blur-[120px] rounded-full"></div>
+
         <div class="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-900/20 blur-[120px] rounded-full"></div>
+
     </div>
 
+
     <!-- Progress Bar -->
+
     <div id="progress-container">
+
         <div id="progress-bar"></div>
+
     </div>
+
 
     <div id="presentation">
 
+
         <!-- ================= SLIDE 1: TITLE ================= -->
+
         <section class="slide active" id="slide-1">
+
             <div class="absolute inset-0 z-0 w-full h-full">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1920" alt="Hintergrund" class="w-full h-full object-cover opacity-60 mix-blend-screen">
+
+                <img src="http://googleusercontent.com/image_generation_content/1" alt="Hintergrund" class="w-full h-full object-cover opacity-60 mix-blend-screen">
+
                 <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/80 to-transparent"></div>
+
             </div>
+
             
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-[0.3em] uppercase text-sm mb-6 drop-shadow-md">Kick-off Präsentation</p>
+
                 <h1 class="fade-up text-6xl md:text-8xl lg:text-9xl font-black text-white leading-none mb-4 tracking-tight uppercase" style="animation-delay: 0.2s;">
+
                     PROJECT:<br><span class="text-gradient">FLOWFORWARD</span>
+
                 </h1>
+
                 <h2 class="fade-up text-3xl md:text-5xl text-gray-300 font-light mb-16 drop-shadow-lg" style="animation-delay: 0.4s;">Gesunde Organisationsentwicklung.</h2>
+
                 
+
                 <div class="fade-up mt-auto pt-8 border-t border-gray-800 w-full flex flex-col md:flex-row items-start md:items-center gap-8" style="animation-delay: 0.6s;">
+
                     <p class="text-gray-400 text-lg font-light hidden md:block">Eine wissenschaftliche Pilotstudie von:</p>
+
                     <div class="flex items-center gap-8">
+
                         <img src="logo_hbrs.png" alt="H-BRS" class="h-12 md:h-16 object-contain filter brightness-0 invert opacity-90 transition-transform hover:scale-105" onerror="this.src='https://via.placeholder.com/200x50/0f172a/ffffff?text=H-BRS'">
+
                         <span class="text-cyan-400 font-light text-3xl">×</span>
+
                         <img src="Logo brainLight.png" alt="brainLight" class="h-10 md:h-14 object-contain filter brightness-0 invert opacity-90 transition-transform hover:scale-105" onerror="this.src='https://via.placeholder.com/150x50/0f172a/ffffff?text=brainLight'">
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 2: VUCA WORLD (INTERACTIVE) ================= -->
+
         <section class="slide" id="slide-2">
+
             <div class="relative z-10 flex h-full items-center p-12 md:p-24 w-full max-w-[90vw]">
+
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+
                     <!-- Left: VUCA Words -->
+
                     <div class="space-y-6">
+
                         <h2 class="fade-up text-5xl font-black text-white mb-2">Die Welt ist <span class="text-gradient">VUCA.</span></h2>
+
                         <p class="fade-up text-xl text-gray-400 mb-12" style="animation-delay: 0.1s;">Transformation ist kein einmaliges Projekt mehr, sondern der permanente Modus Operandi aktueller Unternehmen.</p>
+
                         
+
                         <div class="fade-up flex flex-col gap-4 text-4xl md:text-5xl font-black tracking-widest text-slate-600" style="animation-delay: 0.3s;">
+
                             <div class="vuca-trigger" onmouseenter="showVuca('volatility')" onmouseleave="hideVuca()">VOLATILITY</div>
+
                             <div class="vuca-trigger" onmouseenter="showVuca('uncertainty')" onmouseleave="hideVuca()">UNCERTAINTY</div>
+
                             <div class="vuca-trigger" onmouseenter="showVuca('complexity')" onmouseleave="hideVuca()">COMPLEXITY</div>
+
                             <div class="vuca-trigger" onmouseenter="showVuca('ambiguity')" onmouseleave="hideVuca()">AMBIGUITY</div>
+
                         </div>
+
                     </div>
+
 
                     <!-- Right: Dynamic Display -->
+
                     <div class="fade-up relative h-[450px]" style="animation-delay: 0.5s;">
+
                         <div id="vuca-image" class="absolute inset-0 rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-opacity duration-300 opacity-100 bg-slate-800 flex items-center justify-center p-12 text-center relative">
+
                             <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" alt="Digital Globe" class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-40">
+
                             <div class="relative z-10 flex flex-col items-center">
+
                                 <p class="text-3xl text-white font-light italic leading-relaxed mb-6">
+
                                     "Du kannst die Wellen der Veränderung nicht aufhalten, aber du kannst lernen, auf ihnen zu surfen."
+
                                 </p>
+
                                 <p class="text-xl text-cyan-400 font-semibold">
-                                    — Jon Kabat-Zinn <span onclick="gotoSlide(21)" class="cite-link font-normal text-white hover:text-cyan-200">[6]</span>
+
+                                    — Jon Kabat-Zinn <span onclick="gotoSlide(20)" class="cite-link font-normal text-white hover:text-cyan-200">[6]</span>
+
                                 </p>
+
                             </div>
+
                         </div>
+
                         
+
                         <!-- Explanations (Hidden by default) -->
+
                         <div id="vuca-texts" class="absolute inset-0 glass rounded-3xl p-10 flex flex-col justify-center transition-opacity duration-300 opacity-0 pointer-events-none">
+
                             <div id="text-volatility" class="hidden">
+
                                 <h3 class="text-4xl font-bold text-cyan-400 mb-4">Volatility <span class="text-white text-2xl">(Volatilität)</span></h3>
+
                                 <p class="text-xl text-gray-300 leading-relaxed">Die Geschwindigkeit und Dynamik von Veränderungen nehmen extrem zu. Märkte, Technologien und Anforderungen schwanken stark. Für Mitarbeiter bedeutet das: Ständiger Anpassungsdruck.</p>
+
                             </div>
+
                             <div id="text-uncertainty" class="hidden">
+
                                 <h3 class="text-4xl font-bold text-cyan-400 mb-4">Uncertainty <span class="text-white text-2xl">(Unsicherheit)</span></h3>
+
                                 <p class="text-xl text-gray-300 leading-relaxed">Erfahrungen aus der Vergangenheit sind kein verlässlicher Indikator mehr für die Zukunft. Diese fehlende Vorhersehbarkeit löst im menschlichen Gehirn biologischen Stress und Kontrollverlust aus.</p>
+
                             </div>
+
                             <div id="text-complexity" class="hidden">
+
                                 <h3 class="text-4xl font-bold text-cyan-400 mb-4">Complexity <span class="text-white text-2xl">(Komplexität)</span></h3>
+
                                 <p class="text-xl text-gray-300 leading-relaxed">Systeme sind global vernetzt. Ursache und Wirkung sind nicht mehr linear nachvollziehbar. Das erfordert eine hohe kognitive Flexibilität, die unter Stress oft blockiert wird.</p>
+
                             </div>
+
                             <div id="text-ambiguity" class="hidden">
+
                                 <h3 class="text-4xl font-bold text-cyan-400 mb-4">Ambiguity <span class="text-white text-2xl">(Ambiguität)</span></h3>
+
                                 <p class="text-xl text-gray-300 leading-relaxed">Informationen sind oft mehrdeutig oder widersprüchlich. Es gibt kein einfaches "Richtig" oder "Falsch" mehr. Dies erfordert eine hohe psychologische Fehlertoleranz und Resilienz.</p>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 3: MICROSOFT CASE ================= -->
+
         <section class="slide" id="slide-3">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Erfolgreicher Change in der Praxis</p>
+
                 <div class="flex flex-col lg:flex-row gap-12 items-center">
+
                     <div class="lg:w-1/2">
+
                         <div class="fade-up flex items-center gap-4 mb-8" style="animation-delay: 0.1s;">
+
+                            <!-- Microsoft Logo White -->
+
                             <svg viewBox="0 0 23 23" class="w-12 h-12 fill-white"><path d="M0 0h11v11H0zM12 0h11v11H12zM0 12h11v11H0zM12 12h11v11H12z"/></svg>
+
                             <h2 class="text-5xl font-bold text-white leading-tight">Turnaround:<br><span class="text-gradient">Kultur schlägt Strategie.</span></h2>
+
                         </div>
+
                         
+
                         <div class="fade-up glass p-8 rounded-3xl border-l-4 border-cyan-500 mb-8 relative overflow-hidden" style="animation-delay: 0.3s;">
+
+                            <!-- Chart Background -->
+
                             <svg class="absolute bottom-0 left-0 w-full h-32 opacity-20 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 50">
+
                                 <polyline points="0,50 20,45 40,40 60,20 80,10 100,5" fill="none" stroke="#22d3ee" stroke-width="2"/>
+
                                 <path d="M0,50 L0,50 L20,45 L40,40 L60,20 L80,10 L100,5 L100,50 Z" fill="#22d3ee" opacity="0.3"/>
+
                             </svg>
+
                             
+
                             <h4 class="text-2xl font-bold text-white mb-2 relative z-10">Von "Know-it-all" zu "Learn-it-all"</h4>
+
                             <p class="text-gray-300 leading-relaxed mb-4 relative z-10">
+
                                 Als Satya Nadella 2014 CEO wurde, wandelte er Microsoft durch Prinzipien der positiven Psychologie (Growth Mindset nach Carol Dweck). Anstatt Angst vor Fehlern zu schüren, förderte er psychologische Sicherheit.
+
                             </p>
+
                             <div class="flex items-center gap-4 relative z-10">
+
                                 <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center text-cyan-400">
+
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+
                                 </div>
+
                                 <p class="text-cyan-400 font-bold text-lg">Marktkapitalisierung: Von $300 Mrd. auf über $3 Bio.</p>
+
                             </div>
+
                         </div>
+
                     </div>
+
                     <div class="lg:w-1/2 flex flex-col justify-center">
+
                         <div class="fade-up space-y-6" style="animation-delay: 0.5s;">
-                            <h4 class="text-sm font-bold text-gray-500 uppercase tracking-[0.2em]">Warum Resilienz entscheidend ist<span onclick="gotoSlide(21)" class="cite-link">[1]</span></h4>
+
+                            <h4 class="text-sm font-bold text-gray-500 uppercase tracking-[0.2em]">Warum Resilienz entscheidend ist<span onclick="gotoSlide(20)" class="cite-link">[1]</span></h4>
+
                             <ul class="space-y-6 text-lg text-gray-300">
+
                                 <li class="flex items-start gap-4">
+
                                     <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+
                                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+
                                     </div>
+
                                     <div><strong class="text-white">Stress blockiert Wandel:</strong> Hoher Druck aktiviert die Amygdala (Flucht/Kampf). Kognitives Neulernen wird neurobiologisch verhindert.</div>
+
                                 </li>
+
                                 <li class="flex items-start gap-4">
+
                                     <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+
                                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+
                                     </div>
+
                                     <div><strong class="text-white">Positive Psychologie als Hebel:</strong> Mitarbeitende mit hoher Resilienz weisen nachweislich eine signifikant höhere Veränderungsbereitschaft auf.</div>
+
                                 </li>
+
                             </ul>
+
                             <div class="mt-8 p-6 bg-slate-800/50 rounded-2xl border border-slate-700">
+
                                 <p class="text-sm text-gray-300 italic">"Glauben Sie nicht an Kulturwandel durch Anweisung. Schaffen Sie eine Umgebung, in der Mitarbeiter sich sicher fühlen, Risiken einzugehen."</p>
+
                                 <p class="text-xs text-gray-500 mt-2">— Satya Nadella (sinngemäß)</p>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 4: HANDELSBLATT ================= -->
+
         <section class="slide" id="slide-4">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-8 md:p-16 w-full max-w-[90vw]">
+
                 <div class="flex flex-col lg:flex-row gap-12 items-stretch w-full">
+
                     
+
                     <!-- Left: White Corporate Card -->
+
                     <div class="fade-up white-card w-full lg:w-1/2 flex flex-col max-h-[75vh]" style="animation-delay: 0.2s;">
+
                         <div class="p-8 border-b border-gray-200 bg-gray-50 rounded-t-3xl flex justify-between items-center">
+
                             <img src="https://live.handelsblatt.com/wp-content/uploads/2024/12/changelogo.png" alt="Change Congress Logo" class="h-8 object-contain">
+
                             <span class="text-[10px] uppercase font-sans font-bold tracking-widest text-gray-500">ChangeCongress 2025</span>
+
                         </div>
+
                         
+
                         <div class="newspaper-scroll overflow-y-auto p-8 pt-6 flex-grow">
-                            <h3 class="text-3xl font-bold leading-tight mb-6 font-serif">Acht Thesen zur Zukunft des Change-Managements<span onclick="gotoSlide(21)" class="cite-link text-blue-500 hover:text-blue-700">[2]</span></h3>
+
+                            <h3 class="text-3xl font-bold leading-tight mb-6 font-serif">Acht Thesen zur Zukunft des Change-Managements<span onclick="gotoSlide(20)" class="cite-link text-blue-500 hover:text-blue-700">[2]</span></h3>
+
                             <p class="text-lg italic text-gray-700 mb-8 border-l-4 border-hb-orange pl-4 leading-snug">
+
                                 "Widerstand ist kein Problem – Gleichgültigkeit schon. Wer die Menschen nicht erreicht, verliert die Organisation."
+
                             </p>
+
                             <div class="grid grid-cols-1 gap-5 text-sm leading-relaxed text-gray-800">
+
                                 <div><strong class="hb-orange uppercase tracking-wider text-xs">These 1:</strong> <span class="font-bold text-black">Heroische Führung ist tot.</span> Top-down-Befehle prallen an modernen Strukturen ab.</div>
+
                                 <div><strong class="hb-orange uppercase tracking-wider text-xs">These 2:</strong> <span class="font-bold text-black">Effizienz beginnt mit Zusammenarbeit.</span> Silos sind die Bremsen der Transformation.</div>
+
                                 <div><strong class="hb-orange uppercase tracking-wider text-xs">These 3:</strong> <span class="font-bold text-black">KI ersetzt Routine, nicht Empathie.</span> Technologie ist Motor, Vertrauen ist Treibstoff.</div>
+
                                 <div><strong class="hb-orange uppercase tracking-wider text-xs">These 4:</strong> <span class="font-bold text-black">Demokratisierung von Kompetenz.</span> Change ist eine Grundfähigkeit für alle.</div>
+
                                 <div><strong class="hb-orange uppercase tracking-wider text-xs">These 5:</strong> <span class="font-bold text-black">Psychologische Sicherheit.</span> Ohne die Angstfreiheit zu scheitern, keine Innovation.</div>
+
                                 <div><strong class="hb-orange uppercase tracking-wider text-xs">These 6:</strong> <span class="font-bold text-black">Experimentieren statt Planen.</span> Geschwindigkeit schlägt in VUKA die Perfektion.</div>
-                                <div><strong class="hb-orange uppercase tracking-wider text-xs">These 7:</strong> <span class="hb-orange font-bold text-black">Sinnstiftung (Purpose).</span> Menschen folgen keinen Kennzahlen, sondern Visionen.</div>
-                                <div><strong class="hb-orange uppercase tracking-wider text-xs">These 8:</strong> <span class="hb-orange font-bold text-black">Permanenz.</span> Change ist kein Projekt mit Enddatum, sondern Dauerzustand.</div>
+
+                                <div><strong class="hb-orange uppercase tracking-wider text-xs">These 7:</strong> <span class="font-bold text-black">Sinnstiftung (Purpose).</span> Menschen folgen keinen Kennzahlen, sondern Visionen.</div>
+
+                                <div><strong class="hb-orange uppercase tracking-wider text-xs">These 8:</strong> <span class="font-bold text-black">Permanenz.</span> Change ist kein Projekt mit Enddatum, sondern Dauerzustand.</div>
+
                             </div>
+
                         </div>
+
                         <div class="p-6 border-t border-gray-100 bg-gray-50 rounded-b-3xl">
+
                             <a href="https://live.handelsblatt.com/acht-thesen-zur-zukunft-des-change-managements/" target="_blank" class="block w-full py-3 bg-[#ee7d00] hover:bg-orange-600 text-white text-center rounded-xl font-bold transition-colors">
+
                                 Kompletten Artikel lesen
+
                             </a>
+
                         </div>
+
                     </div>
+
 
                     <!-- Right: Fazit -->
+
                     <div class="w-full lg:w-1/2 flex flex-col justify-center gap-8">
+
                         <div>
+
                             <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-xs mb-4">Die Marktlage</p>
+
                             <h2 class="fade-up text-4xl lg:text-5xl font-bold text-white leading-tight" style="animation-delay: 0.3s;">Transformation als permanenter <span class="text-gradient">Modus.</span></h2>
+
                         </div>
+
                         <p class="fade-up text-lg text-gray-400 leading-relaxed" style="animation-delay: 0.4s;">
+
                             Der methodische Werkzeugkasten reicht nicht mehr aus. Die menschliche Komponente ist das Nadelöhr der Zukunft.
+
                         </p>
+
                         <div class="fade-up bg-cyan-500/10 border border-cyan-500/30 p-8 rounded-3xl relative overflow-hidden shadow-2xl" style="animation-delay: 0.5s;">
+
                             <div class="absolute -right-8 -bottom-8 text-9xl text-cyan-500/10 font-black italic select-none">FAZIT</div>
+
                             <p class="text-white text-xl font-medium leading-relaxed relative z-10">
+
                                 Die <span class="text-cyan-400 font-bold">individuelle Einstellung</span> und die <span class="text-cyan-400 font-bold">neurobiologische Verfassung</span> des Mitarbeitenden (Stressresistenz) werden zum absolut kritischen Erfolgsfaktor.
+
                             </p>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 5: 70 PERCENT ================= -->
+
         <section class="slide" id="slide-5">
+
             <div class="relative z-10 flex flex-col h-full justify-center items-center p-12 text-center w-full">
+
                 <h1 class="fade-up text-[12rem] font-black text-gradient leading-none mb-2">70%</h1>
-                <h2 class="fade-up text-4xl md:text-6xl text-white font-bold mb-8" style="animation-delay: 0.2s;">aller Vorhaben scheitern.<span onclick="gotoSlide(21)" class="cite-link">[3]</span></h2>
+
+                <h2 class="fade-up text-4xl md:text-6xl text-white font-bold mb-8" style="animation-delay: 0.2s;">aller Vorhaben scheitern.<span onclick="gotoSlide(20)" class="cite-link">[3]</span></h2>
+
                 <div class="fade-up glass px-8 py-4 rounded-full border border-red-500/30" style="animation-delay: 0.4s;">
+
                     <p class="text-2xl text-red-200 font-light">Das Problem: <strong class="text-white font-bold">Die Psychologische Barriere.</strong></p>
+
                 </div>
+
                 <p class="fade-up text-xl text-gray-400 max-w-3xl mt-12 leading-relaxed" style="animation-delay: 0.6s;">
+
                     Trotz moderner Frameworks bleibt die emotionale Ebene oft unberücksichtigt. Wenn wir das menschliche Stresslevel im Change ignorieren, verpuffen alle strategischen Bemühungen.
+
                 </p>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 6: CHANGE KURVE ================= -->
+
         <section class="slide" id="slide-6">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Grundlagen der Psychologie</p>
-                <h2 class="fade-up text-5xl font-bold text-white mb-8" style="animation-delay: 0.1s;">Die Change-Kurve <span class="text-2xl text-gray-500 font-light">(nach Kübler-Ross)<span onclick="gotoSlide(21)" class="cite-link">[4]</span></span></h2>
+
+                <h2 class="fade-up text-5xl font-bold text-white mb-8" style="animation-delay: 0.1s;">Die Change-Kurve <span class="text-2xl text-gray-500 font-light">(nach Kübler-Ross)<span onclick="gotoSlide(20)" class="cite-link">[4]</span></span></h2>
+
                 <p class="fade-up text-lg text-gray-400 mb-12 max-w-4xl" style="animation-delay: 0.2s;">Ursprünglich entdeckt als die Phasen der Trauerbewältigung, heute der Standard um zu verstehen, wie Menschen mit Veränderungen – auch in Unternehmen – umgehen.</p>
+
                 
+
                 <div class="fade-up glass p-8 rounded-3xl relative h-[450px] flex items-end border-l-2 border-b-2 border-slate-500" style="animation-delay: 0.4s;">
+
+                    <!-- Y-Axis Label -->
+
                     <div class="absolute top-1/2 -translate-y-1/2 -left-20 md:-left-24 -rotate-90 text-sm text-gray-400 font-bold tracking-widest uppercase whitespace-nowrap">Wahrgenommene Steuerungskompetenz</div>
+
+                    <!-- X-Axis Label -->
+
                     <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-sm text-gray-400 font-bold tracking-widest uppercase">Zeit</div>
+
+
+                    <!-- SVG Curve -->
+
                     <svg class="absolute inset-0 w-full h-full p-8 overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 400">
+
+                        <!-- Curve Path (Status Quo -> Shock -> Denial -> Valley -> Experiment -> Integration) -->
+
                         <path d="M 0 150 C 60 150, 90 220, 120 220 C 170 220, 220 80, 280 80 C 380 80, 450 350, 550 350 C 650 350, 680 200, 750 200 C 850 200, 920 100, 1000 100" fill="none" stroke="#22d3ee" stroke-width="6" stroke-linecap="round" />
+
+                        
+
+                        <!-- Data Points & Labels -->
+
                         <circle cx="0" cy="150" r="8" fill="#f8fafc" />
+
                         <text x="0" y="130" fill="#f8fafc" font-size="14" font-weight="bold">Status Quo</text>
+
+
                         <circle cx="120" cy="220" r="8" fill="#ef4444" />
+
                         <text x="120" y="245" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">Schock</text>
+
+
                         <circle cx="280" cy="80" r="8" fill="#ef4444" />
+
                         <text x="280" y="60" fill="#ef4444" font-size="14" font-weight="bold" text-anchor="middle">Verweigerung</text>
+
+
                         <circle cx="550" cy="350" r="12" fill="#f97316" class="animate-pulse"/>
+
                         <text x="550" y="385" fill="#f97316" font-size="16" font-weight="bold" text-anchor="middle">Tal der Tränen (Frustration/Verwirrung)</text>
+
+
                         <circle cx="750" cy="200" r="8" fill="#eab308" />
+
                         <text x="750" y="230" fill="#eab308" font-size="14" font-weight="bold" text-anchor="middle">Ausprobieren</text>
+
+
                         <circle cx="1000" cy="100" r="8" fill="#22c55e" />
+
                         <text x="980" y="80" fill="#22c55e" font-size="14" font-weight="bold" text-anchor="end">Integration</text>
+
                     </svg>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 7: HOUSE OF CHANGE ================= -->
+
         <section class="slide" id="slide-7">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 max-w-[90vw] mx-auto w-full">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-2 text-center">Modell basierend auf der Change-Kurve</p>
-                <h2 class="fade-up text-5xl font-bold text-white mb-10 text-center" style="animation-delay: 0.1s;">House of Change<span onclick="gotoSlide(21)" class="cite-link">[5]</span></h2>
+
+                <h2 class="fade-up text-5xl font-bold text-white mb-10 text-center" style="animation-delay: 0.1s;">House of Change<span onclick="gotoSlide(20)" class="cite-link">[5]</span></h2>
+
+                
+
                 <div class="fade-up flex flex-col items-center w-full relative" style="animation-delay: 0.3s;">
+
+                    
+
+                    <!-- Faint House Outline in Background -->
+
                     <svg class="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none z-0" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+
                         <path d="M50 5 L10 40 V95 H90 V40 Z" fill="none" stroke="#ffffff" stroke-width="2"/>
+
                     </svg>
+
+
+                    <!-- Die 4 Zimmer (2x2 Grid) -->
+
                     <div class="grid grid-cols-2 gap-4 w-full max-w-5xl relative z-10">
+
+                        
+
+                        <!-- Zimmer 1 -->
+
                         <div class="glass p-8 h-64 flex flex-col justify-center rounded-tl-3xl border-t-4 border-l-4 border-slate-500">
+
                             <h3 class="text-3xl font-bold text-gray-300 mb-2">1. Zufriedenheit</h3>
+
                             <p class="text-base text-gray-400">"Alles läuft gut." Entspannung, aber Gefahr der Betriebsblindheit. Keine Motivation für Wandel.</p>
+
                         </div>
+
+                        
+
+                        <!-- Zimmer 2 -->
+
                         <div class="glass p-8 h-64 flex flex-col justify-center rounded-tr-3xl border-t-4 border-r-4 border-red-500">
+
                             <h3 class="text-3xl font-bold text-red-400 mb-2">2. Verweigerung</h3>
+
                             <p class="text-base text-gray-400">"Das brauchen wir nicht." Aktiver oder passiver Schutzmechanismus. Angst vor Kompetenzverlust.</p>
+
                         </div>
+
+                        
+
+                        <!-- Zimmer 3 (Highlight) -->
+
                         <div class="p-8 h-64 flex flex-col justify-center rounded-bl-3xl bg-gradient-to-br from-orange-900/40 to-slate-900 border border-orange-500/50 relative overflow-hidden group border-b-4 border-l-4">
+
                             <div class="absolute inset-0 bg-orange-500/10 animate-pulse"></div>
+
                             <h3 class="text-3xl font-black text-orange-400 mb-2 relative z-10">3. Verwirrung</h3>
+
                             <p class="text-base text-gray-300 relative z-10 mb-4">Hohe Verunsicherung und Konflikte. <strong class="text-white">Stress blockiert hier kognitive Leistung.</strong></p>
+
                             <div class="text-xs text-orange-200 bg-orange-950/50 p-3 rounded relative z-10 border border-orange-500/30">
-                                <strong>Wissenschaftlicher Hebel:</strong> Positive Psychologie & Resilienz-Interventionen senken das Stresslevel.
+
+                                <strong>Wissenschaftlicher Hebel:</strong> Positive Psychologie & Resilienz-Interventionen senken das Stresslevel und ermöglichen so erst den Übergang in Phase 4.
+
                             </div>
+
                         </div>
+
+                        
+
+                        <!-- Zimmer 4 -->
+
                         <div class="glass p-8 h-64 flex flex-col justify-center rounded-br-3xl border-b-4 border-r-4 border-green-500">
+
                             <h3 class="text-3xl font-bold text-green-400 mb-2">4. Erneuerung</h3>
+
                             <p class="text-base text-gray-400">Akzeptanz und Neugier. Energie wird produktiv für das Neue eingesetzt. Kognitive Flexibilität.</p>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 8: STUDIENPARTNER BRAINLIGHT ================= -->
+
         <section class="slide" id="slide-8">
+
             <div class="absolute inset-0 z-0">
+
                 <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1920" alt="Entspannung" class="w-full h-full object-cover opacity-30 mix-blend-luminosity">
+
                 <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/90 to-slate-950"></div>
+
             </div>
+
             <div class="relative z-10 flex flex-col h-full justify-center items-center p-12 text-center w-full max-w-[90vw]">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-6">Die Lösung zur Resilienz-Förderung</p>
+
                 <h2 class="fade-up text-5xl md:text-7xl font-bold text-white mb-12" style="animation-delay: 0.1s;">Studienpartner:<br><span class="text-gradient">brainLight</span></h2>
+
+                
+
                 <div class="fade-up bg-white/5 backdrop-blur-xl p-8 rounded-3xl border border-white/10 inline-block mb-12" style="animation-delay: 0.3s;">
+
                     <img src="Logo brainLight.png" alt="brainLight" class="h-16 object-contain filter brightness-0 invert" onerror="this.style.display='none'">
-                    <span class="text-3xl font-bold text-white tracking-widest">brainLight</span>
+
                 </div>
+
+                
+
                 <p class="fade-up text-2xl text-gray-300 max-w-3xl leading-relaxed" style="animation-delay: 0.5s;">
+
                     Der Weltmarktführer für ganzheitliche Entspannungssysteme in Unternehmen. Die Mission: Mitarbeitende neurobiologisch stärken, um sie widerstandsfähiger für die VUKA-Welt zu machen.
+
                 </p>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 9: PRODUKTE ================= -->
+
         <section class="slide" id="slide-9">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Das Portfolio</p>
+
                 <h2 class="fade-up text-5xl font-bold text-white mb-12" style="animation-delay: 0.1s;">brainLight Produkte im Überblick</h2>
+
+                
+
                 <div class="fade-up grid grid-cols-1 md:grid-cols-3 gap-8 w-full" style="animation-delay: 0.3s;">
+
+                    <!-- Produkt 1 -->
+
                     <div class="glass rounded-3xl overflow-hidden flex flex-col items-center p-8 text-center group hover:bg-slate-800/80 transition-colors">
+
                         <div class="h-48 w-full flex items-center justify-center mb-6">
+
+                            <!-- Aktualisiertes Bild für Massagesessel -->
+
                             <img src="https://www.brainlight.de/assets/data/assets/crops/square.27a9f6b9.sp_sphere_nat_600x600.png" alt="Shiatsu Massagesessel" class="max-h-full object-contain group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/300x400/0f172a/ffffff?text=Shiatsu+Massagesessel'">
+
                         </div>
+
                         <h3 class="text-2xl font-bold text-white mb-3">Shiatsu-Massagesessel</h3>
+
                         <p class="text-gray-400 text-sm">Vollständige körperliche Entspannung durch tiefgehende Massage kombiniert mit audio-visueller Stimulation.</p>
+
                     </div>
+
+                    
+
+                    <!-- Produkt 2 -->
+
                     <div class="glass rounded-3xl overflow-hidden flex flex-col items-center p-8 text-center group hover:bg-slate-800/80 transition-colors">
+
                         <div class="h-48 w-full flex items-center justify-center mb-6 rounded-xl overflow-hidden">
+
                             <img src="https://www.brainlight.de/assets/crops/square.becd9be5.brainlight_mobil_basic_kit_in_ear.jpg" alt="brainLight Mobil" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
                         </div>
+
                         <h3 class="text-2xl font-bold text-white mb-3">brainLight Mobil</h3>
-                        <p class="text-gray-400 text-sm">Die portable Lösung. Ideal für flexible Arbeitsplätze, Home-Office oder Rückzugsräume.</p>
+
+                        <p class="text-gray-400 text-sm">Die portable Lösung. Ideal für flexible Arbeitsplätze, Home-Office oder Rückzugsräume ohne großen Platzbedarf.</p>
+
                     </div>
+
+
+                    <!-- Produkt 3 -->
+
                     <div class="glass rounded-3xl overflow-hidden flex flex-col items-center p-8 text-center group hover:bg-slate-800/80 transition-colors">
+
                         <div class="h-48 w-full flex items-center justify-center mb-6 rounded-xl overflow-hidden">
+
                             <img src="https://www.brainlight.de/assets/data/assets/crops/square.9064a9e1.rs_pro_private_tide_rosa_rosmarin.jpg" alt="Relax Station" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
                         </div>
+
                         <h3 class="text-2xl font-bold text-white mb-3">Relax Station</h3>
+
                         <p class="text-gray-400 text-sm">Das ganzheitliche Premium-Setup für dedizierte Ruheräume im Corporate-Bereich. Maximale Abschirmung.</p>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ================= SLIDE 10: TECHNOLOGIE ================= -->
+
+        <!-- ================= SLIDE 10: TECHNOLOGIE (MENTALSYSTEME) ================= -->
+
         <section class="slide" id="slide-10">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Wissenschaftliche Basis</p>
+
                 <h2 class="fade-up text-5xl font-bold text-white mb-12" style="animation-delay: 0.1s;">Wie funktionieren Mentalsysteme?</h2>
+
+                
+
                 <div class="flex flex-col lg:flex-row gap-12">
+
                     <div class="lg:w-1/2 fade-up space-y-6" style="animation-delay: 0.3s;">
+
                         <h3 class="text-3xl font-bold text-cyan-400">Audio-Visuelle Stimulation (AVS)</h3>
-                        <p class="text-lg text-gray-300 leading-relaxed">Mentalsysteme nutzen das Prinzip des <strong class="text-white">Gehirnwellen-Entrainments</strong> (Frequency Following Response).</p>
-                        <p class="text-lg text-gray-300 leading-relaxed">Durch präzise getaktete optische und akustische Reize wird das zentrale Nervensystem reproduzierbar vom Sympathikus (Stress) in den Parasympathikus (Regeneration) geführt.</p>
+
+                        <p class="text-lg text-gray-300 leading-relaxed">
+
+                            Mentalsysteme nutzen das Prinzip des <strong class="text-white">Gehirnwellen-Entrainments</strong> (Frequency Following Response). 
+
+                        </p>
+
+                        <p class="text-lg text-gray-300 leading-relaxed">
+
+                            Durch präzise getaktete optische Reize (Lichtblitze über die geschlossenen Augen) und akustische Signale (binaurale Beats) wird das Gehirn stimuliert, sich auf spezifische Frequenzen einzuschwingen. Dies führt das zentrale Nervensystem reproduzierbar vom Sympathikus (Stress, Flucht) in den Parasympathikus (Regeneration).
+
+                        </p>
+
                     </div>
+
+                    
+
                     <div class="lg:w-1/2 fade-up grid grid-cols-1 gap-4" style="animation-delay: 0.5s;">
+
+                        <!-- Frequencies -->
+
                         <div class="glass p-5 rounded-2xl border-l-4 border-red-500 flex items-center gap-4">
+
                             <div class="text-red-400 font-bold text-xl w-24">Beta<br><span class="text-sm font-normal">13-30 Hz</span></div>
-                            <p class="text-sm text-gray-300">Wacher Zustand. Bei Dauerbelastung entsteht hier <strong class="text-white">Distress</strong>.</p>
+
+                            <p class="text-sm text-gray-300">Wacher Zustand, logisches Denken. Bei Dauerbelastung im Change entsteht hier <strong class="text-white">Distress</strong>.</p>
+
                         </div>
+
                         <div class="glass p-5 rounded-2xl border-l-4 border-yellow-500 flex items-center gap-4">
+
                             <div class="text-yellow-400 font-bold text-xl w-24">Alpha<br><span class="text-sm font-normal">8-12 Hz</span></div>
-                            <p class="text-sm text-gray-300">Leichte Entspannung. Gesteigerte <strong class="text-white">kognitive Flexibilität</strong>.</p>
+
+                            <p class="text-sm text-gray-300">Leichte Entspannung, "Super-Learning". Gesteigerte <strong class="text-white">kognitive Flexibilität</strong> für Neues.</p>
+
                         </div>
+
                         <div class="glass p-5 rounded-2xl border-l-4 border-green-500 flex items-center gap-4">
+
                             <div class="text-green-400 font-bold text-xl w-24">Theta<br><span class="text-sm font-normal">4-7 Hz</span></div>
-                            <p class="text-sm text-gray-300">Tiefenentspannung. Effektive <strong class="text-white">Regeneration</strong>.</p>
+
+                            <p class="text-sm text-gray-300">Tiefenentspannung, Traumschlaf. Effektive <strong class="text-white">Regeneration</strong> und Stressabbau.</p>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 11: PROGRAMME ================= -->
+
         <section class="slide" id="slide-11">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Interventionen</p>
+
                 <h2 class="fade-up text-5xl font-bold text-white mb-12" style="animation-delay: 0.1s;">Vielfalt der Programmbereiche</h2>
+
+                
+
                 <div class="fade-up grid grid-cols-2 md:grid-cols-4 gap-6" style="animation-delay: 0.3s;">
-                    <div class="glass p-6 rounded-2xl border border-cyan-500/20 group hover:border-cyan-500 transition-colors text-center">Fokus & Lernen</div>
-                    <div class="glass p-6 rounded-2xl border border-blue-500/20 group hover:border-blue-500 transition-colors text-center">Tiefenentspannung</div>
-                    <div class="glass p-6 rounded-2xl border border-indigo-500/20 group hover:border-indigo-500 transition-colors text-center">Geführte Meditation</div>
-                    <div class="glass p-6 rounded-2xl border border-green-500/20 group hover:border-green-500 transition-colors text-center">Gesundheit</div>
+
+                    <div class="glass p-6 rounded-2xl border border-cyan-500/20 hover:border-cyan-500 transition-colors group">
+
+                        <div class="w-14 h-14 bg-cyan-500/20 rounded-full flex items-center justify-center mb-6 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-colors">
+
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white mb-2">Fokus & Lernen</h3>
+
+                        <p class="text-sm text-gray-400">Programme zur Steigerung der Konzentrationsfähigkeit und Aufnahmebereitschaft (Alpha-Wellen).</p>
+
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl border border-blue-500/20 hover:border-blue-500 transition-colors group">
+
+                        <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mb-6 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white mb-2">Tiefenentspannung</h3>
+
+                        <p class="text-sm text-gray-400">Klassischer Stressabbau. Führt tief in den Theta-Bereich zur schnellen Regeneration in Pausen.</p>
+
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl border border-indigo-500/20 hover:border-indigo-500 transition-colors group">
+
+                        <div class="w-14 h-14 bg-indigo-500/20 rounded-full flex items-center justify-center mb-6 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white mb-2">Geführte Meditation</h3>
+
+                        <p class="text-sm text-gray-400">Sprachgeführte Begleitung (Achtsamkeit, Resilienzaufbau) kombiniert mit AVS.</p>
+
+                    </div>
+
+                    <div class="glass p-6 rounded-2xl border border-green-500/20 hover:border-green-500 transition-colors group">
+
+                        <div class="w-14 h-14 bg-green-500/20 rounded-full flex items-center justify-center mb-6 text-green-400 group-hover:bg-green-500 group-hover:text-white transition-colors">
+
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+
+                        </div>
+
+                        <h3 class="text-xl font-bold text-white mb-2">Gesundheit</h3>
+
+                        <p class="text-sm text-gray-400">Präventive Ansätze wie Schlafvorbereitung oder Programme zur Schmerzbewältigung.</p>
+
+                    </div>
+
                 </div>
+
                 <div class="fade-up mt-8 text-center" style="animation-delay: 0.5s;">
+
                     <p class="text-gray-500 text-sm">Alle Blöcke: <a href="https://www.brainlight.de/programmbloecke/" target="_blank" class="text-cyan-400 hover:underline">brainlight.de/programmbloecke</a></p>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 12: EVIDENZ ================= -->
+
         <section class="slide" id="slide-12">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
+
                 <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Das Fundament</p>
+
                 <h2 class="fade-up text-5xl font-bold text-white mb-12" style="animation-delay: 0.1s;">Unsere bisherige Forschung</h2>
+
+                <p class="fade-up text-xl text-gray-400 mb-12" style="animation-delay: 0.2s;">Wir fangen nicht bei Null an. Forschung der H-BRS zeigt eindeutig:</p>
+
+                
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div onclick="window.open('https://www.brainlight.de/PDF/Studien/Ghadiri-et-al2014-101.pdf', '_blank')" class="cursor-pointer block fade-up glass p-8 rounded-2xl hover:-translate-y-2 hover:border-cyan-400 transition-all group">
-                        <h4 class="text-cyan-400 font-bold mb-2">Paper 2014 (Ghadiri et al.)</h4>
+
+                    <!-- Paper 1 -->
+
+                    <div onclick="window.open('https://www.brainlight.de/PDF/Studien/Ghadiri-et-al2014-101.pdf', '_blank')" class="cursor-pointer block fade-up glass p-8 rounded-2xl hover:-translate-y-2 hover:border-cyan-400 transition-all duration-300 group" style="animation-delay: 0.3s;">
+
+                        <div class="w-14 h-14 bg-cyan-500/20 rounded-full flex items-center justify-center mb-6 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-colors"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div>
+
+                        <h4 class="text-cyan-400 font-bold mb-2">Paper 2014 (Ghadiri et al.)<span onclick="event.stopPropagation(); gotoSlide(20)" class="cite-link hover:text-cyan-200">[7]</span></h4>
+
                         <h3 class="text-2xl font-bold text-white mb-4">Mehr Fokus</h3>
-                        <p class="text-gray-400">Steigerung der Konzentrationsleistung nach AVS-Pausen.</p>
+
+                        <p class="text-gray-400">Signifikante Steigerung der Konzentrationsleistung nach audio-visuellen Pausen gegenüber herkömmlichen Pausen. <span class="text-cyan-400 text-xs uppercase block mt-4 group-hover:underline">PDF Lesen &rarr;</span></p>
+
                     </div>
-                    <div onclick="window.open('https://www.mdpi.com/1660-4601/19/15/9370', '_blank')" class="cursor-pointer block fade-up glass p-8 rounded-2xl hover:-translate-y-2 hover:border-blue-400 transition-all group border-t border-blue-500/50">
-                        <h4 class="text-blue-400 font-bold mb-2">Paper 2022 (IJERPH)</h4>
+
+                    
+
+                    <!-- Paper 2 -->
+
+                    <div onclick="window.open('https://www.mdpi.com/1660-4601/19/15/9370', '_blank')" class="cursor-pointer block fade-up glass p-8 rounded-2xl hover:-translate-y-2 hover:border-blue-400 transition-all duration-300 border-t border-t-blue-500/50 group" style="animation-delay: 0.4s;">
+
+                        <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mb-6 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-colors"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+
+                        <h4 class="text-blue-400 font-bold mb-2">Paper 2022 (IJERPH)<span onclick="event.stopPropagation(); gotoSlide(20)" class="cite-link hover:text-blue-200">[8]</span></h4>
+
                         <h3 class="text-2xl font-bold text-white mb-4">Burnout-Prävention</h3>
-                        <p class="text-gray-400">Reduktion von Symptomen und Steigerung des Engagements.</p>
+
+                        <p class="text-gray-400">Signifikante Reduktion von Burnout-Symptomen und messbare Steigerung des Work Engagements. <span class="text-blue-400 text-xs uppercase block mt-4 group-hover:underline">MDPI Link &rarr;</span></p>
+
                     </div>
-                    <div onclick="window.open('https://www.brainlight.de/PDF/Studien/Kinderleicht-lernen/Evaluation-Studie-Kinderleicht-lernen-Gesamt-Studienzyklen-3-12.pdf', '_blank')" class="cursor-pointer block fade-up glass p-8 rounded-2xl hover:-translate-y-2 hover:border-purple-400 transition-all group border-t border-purple-500/50">
+
+
+                    <!-- Projekt -->
+
+                    <div onclick="window.open('https://www.brainlight.de/PDF/Studien/Kinderleicht-lernen/Evaluation-Studie-Kinderleicht-lernen-Gesamt-Studienzyklen-3-12.pdf', '_blank')" class="cursor-pointer block fade-up glass p-8 rounded-2xl hover:-translate-y-2 hover:border-purple-400 transition-all duration-300 border-t border-t-purple-500/50 group" style="animation-delay: 0.5s;">
+
+                        <div class="w-14 h-14 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-colors"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+
                         <h4 class="text-purple-400 font-bold mb-2">Projekt 2024 ("Kinderleicht")</h4>
+
                         <h3 class="text-2xl font-bold text-white mb-4">Emotionale Balance</h3>
-                        <p class="text-gray-400">Rückgang von subjektivem Stress und Selbstzweifeln.</p>
+
+                        <p class="text-gray-400">Rückgang von subjektivem Stress und Selbstzweifeln. Steigerung des Parameters "Freude". <span class="text-purple-400 text-xs uppercase block mt-4 group-hover:underline">PDF Lesen &rarr;</span></p>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- ================= SLIDE 13: MISSION ================= -->
+
         <section class="slide" id="slide-13">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 text-center w-full max-w-[90vw]">
-                <h2 class="fade-up text-3xl md:text-4xl text-gray-400 font-light mb-8">Wir wissen, dass Entspannung wirkt.<br><strong class="text-white">Unser Praxisprojekt</strong> fragt nun:</h2>
-                <div class="fade-up glass p-12 rounded-3xl border-l-4 border-l-cyan-400 relative inline-block mx-auto">
-                    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight">Kann brainLight zu einer gesunden <span class="text-gradient">Organisationsentwicklung</span> beitragen?</h1>
-                </div>
-            </div>
-        </section>
 
-        <!-- ================= SLIDE 14: ZIELGRUPPE (NEU) ================= -->
-        <section class="slide" id="slide-14">
-            <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Studien-Fokus</p>
-                <h2 class="fade-up text-5xl font-bold text-white mb-12">Die Zielgruppe</h2>
+                <div class="fade-up mb-8" style="animation-delay: 0.1s;">
+
+                    <svg class="w-20 h-20 mx-auto text-cyan-400 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+
+                </div>
+
+                <h2 class="fade-up text-3xl md:text-4xl text-gray-400 font-light mb-8" style="animation-delay: 0.3s;">Wir wissen, dass Entspannung wirkt.<br><strong class="text-white">Unser Praxisprojekt</strong> fragt nun:</h2>
+
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="fade-up space-y-8" style="animation-delay: 0.2s;">
-                        <div class="glass p-8 rounded-2xl border-l-4 border-cyan-500 shadow-xl">
-                            <h3 class="text-2xl font-bold text-white mb-4">Unternehmen im Wandel</h3>
-                            <p class="text-lg text-gray-300 leading-relaxed">
-                                Ziel des Projekts ist es, Mitarbeitende in Unternehmen, die sich in <strong>tiefgreifenden Veränderungsprozessen</strong> befinden (z. B. Reorganisation, Digitalisierung, Fusionen), anzusprechen.
-                            </p>
-                        </div>
-                        <div class="glass p-8 rounded-2xl border-l-4 border-blue-500 shadow-xl">
-                            <h3 class="text-2xl font-bold text-white mb-4">Fokus-Belegschaft</h3>
-                            <p class="text-lg text-gray-300 leading-relaxed">
-                                Beschäftigte in Unternehmen mit hoher Veränderungsdynamik, insbesondere Mitarbeitende mit <strong>erhöhtem Belastungserleben</strong> oder geringer Veränderungsbereitschaft.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="lg:w-1/2 fade-up" style="animation-delay: 0.4s;">
-                        <div class="rounded-3xl overflow-hidden shadow-2xl border border-white/10 aspect-video bg-slate-800 flex items-center justify-center text-gray-500 italic">
-                            
-                        </div>
-                    </div>
+
+                <div class="fade-up glass p-12 rounded-3xl border-l-4 border-l-cyan-400 relative inline-block mx-auto" style="animation-delay: 0.5s;">
+
+                    <div class="absolute -top-6 -left-6 text-8xl text-cyan-500 opacity-20">"</div>
+
+                    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight">
+
+                        Kann ein Entspannungssystem wie brainLight zu einer gesunden <span class="text-gradient">Organisationsentwicklung</span> (Change) beitragen?
+
+                    </h1>
+
                 </div>
+
+                <div class="fade-up mt-12 bg-slate-800 p-6 rounded-2xl max-w-3xl mx-auto border border-slate-700 text-left" style="animation-delay: 0.7s;">
+
+                    <p class="text-xl text-cyan-400 font-semibold mb-2">Euer Arbeitsauftrag:</p>
+
+                    <p class="text-gray-300">Ihr sollt eigenständig recherchieren, auf welcher wissenschaftlichen Basis dieser Zusammenhang (Entspannung &rarr; Change-Erfolg) möglich ist. <br><br>Wie genau das untersucht wird (Forschungsdesign) und welches brainLight-System dabei angewendet wird, obliegt eurer wissenschaftlichen Kreativität!</p>
+
+                </div>
+
             </div>
+
         </section>
 
-        <!-- ================= SLIDE 15: SETUP / TO DOS ================= -->
-        <section class="slide" id="slide-15">
+
+        <!-- ================= SLIDE 14: SETUP / TO DOS ================= -->
+
+        <section class="slide" id="slide-14">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <h2 class="fade-up text-5xl font-bold text-white mb-16 text-center">1 Mission. 2 Teams. Euer Fokus.</h2>
+
+                <h2 class="fade-up text-5xl font-bold text-white mb-16 text-center" style="animation-delay: 0.1s;">1 Mission. 2 Teams. Euer Fokus.</h2>
+
+                
+
                 <div class="flex flex-col md:flex-row gap-8 w-full items-stretch">
-                    <div class="fade-up flex-1 glass p-10 rounded-3xl border-2 border-transparent hover:border-cyan-500/50 transition-colors">
+
+                    <!-- Team A -->
+
+                    <div class="fade-up flex-1 glass p-10 rounded-3xl border-2 border-transparent hover:border-cyan-500/50 transition-colors" style="animation-delay: 0.3s;">
+
                         <h3 class="text-4xl font-black text-white mb-2">Team <span class="text-cyan-400">A</span></h3>
-                        <p class="text-gray-400 italic">Definiert euren eigenen Schwerpunkt und leitet eure Forschungsfrage ab.</p>
+
+                        <p class="text-gray-400 mb-8 pb-8 border-b border-gray-700 italic">Definiert euren eigenen Schwerpunkt und leitet eure Forschungsfrage ab.</p>
+
                     </div>
-                    <div class="fade-up flex items-center justify-center text-gray-600 font-black text-5xl italic">VS</div>
-                    <div class="fade-up flex-1 glass p-10 rounded-3xl border-2 border-transparent hover:border-blue-500/50 transition-colors">
+
+                    
+
+                    <div class="fade-up flex items-center justify-center text-gray-600 font-black text-5xl italic" style="animation-delay: 0.4s;">VS</div>
+
+
+                    <!-- Team B -->
+
+                    <div class="fade-up flex-1 glass p-10 rounded-3xl border-2 border-transparent hover:border-blue-500/50 transition-colors" style="animation-delay: 0.5s;">
+
                         <h3 class="text-4xl font-black text-white mb-2">Team <span class="text-blue-500">B</span></h3>
-                        <p class="text-gray-400 italic">Definiert euren eigenen Schwerpunkt und leitet eure Forschungsfrage ab.</p>
+
+                        <p class="text-gray-400 mb-8 pb-8 border-b border-gray-700 italic">Definiert euren eigenen Schwerpunkt und leitet eure Forschungsfrage ab.</p>
+
                     </div>
+
                 </div>
-                <div class="fade-up mt-12 bg-cyan-900/20 border border-cyan-500/30 p-8 rounded-3xl text-center">
+
+                
+
+                <div class="fade-up mt-12 bg-cyan-900/20 border border-cyan-500/30 p-8 rounded-3xl text-center" style="animation-delay: 0.7s;">
+
                     <h4 class="text-2xl font-bold text-white mb-4">Das Ziel (Deliverable)</h4>
-                    <p class="text-xl text-gray-300">Ihr erstellt <strong class="text-cyan-400">1 Pitch-Deck</strong> je Team zur Unternehmensakquise.</p>
+
+                    <p class="text-xl text-gray-300">
+
+                        Ihr erstellt <strong class="text-cyan-400">1 Pitch-Deck</strong> je Team, mit dem brainLight das von euch erdachte Forschungsprojekt anschließend bei Unternehmen pitchen (und akquirieren) kann.
+
+                    </p>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ================= SLIDE 16: TIMELINE ================= -->
-        <section class="slide" id="slide-16">
+
+        <!-- ================= SLIDE 15: TIMELINE ================= -->
+
+        <section class="slide" id="slide-15">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <h2 class="fade-up text-5xl font-bold text-white mb-16 text-center">Fahrplan & Meilensteine</h2>
-                <div class="fade-up relative max-w-4xl mx-auto w-full">
+
+                <h2 class="fade-up text-5xl font-bold text-white mb-16 text-center" style="animation-delay: 0.1s;">Der Grobe Fahrplan</h2>
+
+                
+
+                <div class="fade-up relative max-w-4xl mx-auto w-full" style="animation-delay: 0.3s;">
+
+                    <!-- Line -->
+
                     <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-slate-800"></div>
+
+                    
+
                     <div class="space-y-10">
+
                         <div class="relative flex items-center justify-between w-full">
+
                             <div class="w-5/12 text-right pr-8"><h3 class="text-2xl font-bold text-cyan-400">April</h3></div>
+
                             <div class="w-6 h-6 bg-cyan-500 rounded-full z-10 shadow-[0_0_15px_#06b6d4]"></div>
-                            <div class="w-5/12 pl-8"><h4 class="text-xl font-bold text-white">Kick-off & Design</h4></div>
+
+                            <div class="w-5/12 pl-8"><h4 class="text-xl font-bold text-white">Kick-off & Design</h4><p class="text-gray-400 text-sm">Teams bilden und das Forschungsdesign (z.B. Waitlist-Control) festlegen.</p></div>
+
                         </div>
+
                         <div class="relative flex items-center justify-between w-full">
-                            <div class="w-5/12 text-right pr-8"><h4 class="text-xl font-bold text-white">Pitch-Deck Abgabe</h4></div>
+
+                            <div class="w-5/12 text-right pr-8"><h4 class="text-xl font-bold text-white">Präsentation Pitch-Deck</h4><p class="text-gray-400 text-sm"><strong class="text-orange-400">Fokus:</strong> Abgabe der Verkaufsunterlagen, damit brainLight Unternehmen akquirieren kann.</p></div>
+
                             <div class="w-6 h-6 bg-slate-700 border-2 border-orange-500 rounded-full z-10"></div>
+
                             <div class="w-5/12 pl-8"><h3 class="text-2xl font-bold text-cyan-400">Mai</h3></div>
+
                         </div>
+
                         <div class="relative flex items-center justify-between w-full">
-                            <div class="w-5/12 text-right pr-8"><h3 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">06. Juli</h3></div>
-                            <div class="w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full z-10 shadow-[0_0_20px_#3b82f6] animate-pulse"></div>
-                            <div class="w-5/12 pl-8"><h4 class="text-xl font-bold text-white">THE GRAND PITCH</h4></div>
+
+                            <div class="w-5/12 text-right pr-8"><h3 class="text-2xl font-bold text-cyan-400">Anfang Juni</h3></div>
+
+                            <div class="w-6 h-6 bg-slate-700 border-2 border-cyan-500 rounded-full z-10"></div>
+
+                            <div class="w-5/12 pl-8"><h4 class="text-xl font-bold text-white">Review der Fragebögen</h4><p class="text-gray-400 text-sm">Schulterblick und Feedback von Benjamin Klenke.</p></div>
+
                         </div>
+
+                        <div class="relative flex items-center justify-between w-full">
+
+                            <div class="w-5/12 text-right pr-8"><h4 class="text-xl font-bold text-white">Technical Build & Test</h4><p class="text-gray-400 text-sm">Programmierung (Lamapoll) & Auswertungsplanung mit Dummy-Daten.</p></div>
+
+                            <div class="w-6 h-6 bg-slate-700 border-2 border-cyan-500 rounded-full z-10"></div>
+
+                            <div class="w-5/12 pl-8"><h3 class="text-2xl font-bold text-cyan-400">Ende Juni</h3></div>
+
+                        </div>
+
+                        <div class="relative flex items-center justify-between w-full">
+
+                            <div class="w-5/12 text-right pr-8"><h3 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">06. Juli</h3></div>
+
+                            <div class="w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full z-10 shadow-[0_0_20px_#3b82f6] animate-pulse"></div>
+
+                            <div class="w-5/12 pl-8"><h4 class="text-xl font-bold text-white">THE GRAND PITCH</h4><p class="text-gray-400 text-sm">Finaler Pitch vor der Geschäftsführung.</p></div>
+
+                        </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- [Slides 17-21: Methodik, Literatur, Data Science, Zeitplan Tabelle, Quellen] -->
-        <!-- [Hier folgen die detaillierten Folien analog zum Original] -->
-        <section class="slide" id="slide-17">
+
+        <!-- ================= SLIDE 16: METHODIK ================= -->
+
+        <section class="slide" id="slide-16">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <h2 class="text-5xl font-bold text-white mb-12">Empirische Erhebungen</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="glass p-8 rounded-3xl"><h3 class="text-2xl font-bold text-white mb-4">Qualitativ</h3><p class="text-gray-400">Interviews, Fokusgruppen.</p></div>
-                    <div class="glass p-8 rounded-3xl border-2 border-cyan-500"><h3 class="text-2xl font-bold text-cyan-400 mb-4">Quantitativ</h3><p class="text-gray-300">Standardisierte Befragung (Likert).</p></div>
-                    <div class="glass p-8 rounded-3xl"><h3 class="text-2xl font-bold text-white mb-4">Literatur</h3><p class="text-gray-400">Primär-/Sekundärquellen.</p></div>
+
+                <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Das Handwerkszeug I</p>
+
+                <h2 class="fade-up text-5xl font-bold text-white mb-12" style="animation-delay: 0.1s;">Empirische Erhebungen</h2>
+
+                
+
+                <div class="fade-up grid grid-cols-1 md:grid-cols-3 gap-6" style="animation-delay: 0.3s;">
+
+                    
+
+                    <!-- Qualitativ -->
+
+                    <div class="glass p-8 rounded-3xl">
+
+                        <h3 class="text-2xl font-bold text-white mb-4 border-b border-slate-600 pb-2">Qualitativ / Explorativ</h3>
+
+                        <ul class="space-y-3 text-gray-400">
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Interview
+
+                                <div class="tooltip absolute z-20 left-0 mt-2 w-64 p-3 bg-slate-800 text-xs text-gray-300 rounded shadow-xl border border-slate-600">Nutzer, Experten, Delphi. Offene Fragen zur Hypothesenbildung.</div>
+
+                            </li>
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Fokusgruppen
+
+                                <div class="tooltip absolute z-20 left-0 mt-2 w-64 p-3 bg-slate-800 text-xs text-gray-300 rounded shadow-xl border border-slate-600">Geleitete Gruppendiskussionen zur Erkundung von Einstellungen.</div>
+
+                            </li>
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Co-Design-Studie
+
+                                <div class="tooltip absolute z-20 left-0 mt-2 w-64 p-3 bg-slate-800 text-xs text-gray-300 rounded shadow-xl border border-slate-600">Gemeinsame Entwicklung von Lösungen mit den Nutzern.</div>
+
+                            </li>
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Beobachtungen</li>
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Artefaktanalyse</li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Quantitativ (Highlight) -->
+
+                    <div class="glass p-8 rounded-3xl border-2 border-cyan-500 relative bg-cyan-900/10">
+
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-slate-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Klare Empfehlung</div>
+
+                        <h3 class="text-2xl font-bold text-cyan-400 mb-4 border-b border-cyan-500/30 pb-2">Quantitativ / Testen</h3>
+
+                        <ul class="space-y-3 text-gray-300">
+
+                            <li class="method-item relative cursor-help hover:text-cyan-300 transition-colors">&bull; Befragung
+
+                                <div class="tooltip absolute z-20 left-0 mt-2 w-64 p-3 bg-slate-800 text-xs text-gray-300 rounded shadow-xl border border-slate-600">Standardisierte, skalierte Fragebögen (z.B. Likert-Skalen). Ideal zur Hypothesenprüfung.</div>
+
+                            </li>
+
+                            <li class="method-item relative cursor-help hover:text-cyan-300 transition-colors">&bull; Standardisiertes Interview
+
+                                <div class="tooltip absolute z-20 left-0 mt-2 w-64 p-3 bg-slate-800 text-xs text-gray-300 rounded shadow-xl border border-slate-600">Feste Fragen & Antwortvorgaben.</div>
+
+                            </li>
+
+                            <li class="method-item relative cursor-help hover:text-cyan-300 transition-colors">&bull; Vorhandene Daten / Stat.</li>
+
+                        </ul>
+
+                        <div class="mt-6 pt-4 border-t border-cyan-500/20 text-xs text-cyan-200">
+
+                            Fokus für dieses Projekt: <strong>Konfirmatorische Forschung (Feldexperiment)</strong>. Andere Ideen können wir gerne diskutieren.
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Literatur -->
+
+                    <div class="glass p-8 rounded-3xl">
+
+                        <h3 class="text-2xl font-bold text-white mb-4 border-b border-slate-600 pb-2">Literaturanalyse</h3>
+
+                        <ul class="space-y-3 text-gray-400">
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Primär- und Sekundärquellen
+
+                                <div class="tooltip absolute z-20 right-0 mt-2 w-64 p-3 bg-slate-800 text-xs text-gray-300 rounded shadow-xl border border-slate-600">Originalstudien vs. Review-Artikel.</div>
+
+                            </li>
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Strukturiert</li>
+
+                            <li class="method-item relative cursor-help hover:text-white transition-colors">&bull; Explorativ</li>
+
+                        </ul>
+
+                    </div>
+
+
                 </div>
+
             </div>
+
         </section>
+
+
+        <!-- ================= SLIDE 17: LITERATURRECHERCHE ================= -->
+
+        <section class="slide" id="slide-17">
+
+            <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
+
+                <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Das Handwerkszeug II</p>
+
+                <h2 class="fade-up text-5xl font-bold text-white mb-12" style="animation-delay: 0.1s;">Systematische Literaturrecherche</h2>
+
+                
+
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+
+                    <div class="lg:w-1/2 fade-up space-y-8" style="animation-delay: 0.3s;">
+
+                        <p class="text-xl text-gray-300">
+
+                            Bevor wir Hypothesen testen, müssen wir wissen, was der Stand der Wissenschaft ist. Das ist der <strong>erste Schritt</strong> eurer Arbeit.
+
+                        </p>
+
+                        <div class="space-y-4">
+
+                            <div class="glass p-5 rounded-xl border-l-4 border-blue-500">
+
+                                <h4 class="text-white font-bold mb-1">1. Datenbanken nutzen</h4>
+
+                                <p class="text-gray-400 text-sm">Nutzt Google Scholar, EBSCO, PubMed oder Web of Science für wissenschaftliche Paper.</p>
+
+                            </div>
+
+                            <div class="glass p-5 rounded-xl border-l-4 border-cyan-500">
+
+                                <h4 class="text-white font-bold mb-1">2. Validierte Skalen finden</h4>
+
+                                <p class="text-gray-400 text-sm">Erfindet keine eigenen Fragen! Sucht gezielt nach existierenden, geprüften Fragebögen (z.B. "Perceived Stress Scale validation").</p>
+
+                            </div>
+
+                            <div class="glass p-5 rounded-xl border-l-4 border-green-500">
+
+                                <h4 class="text-white font-bold mb-1">3. Fragen extrahieren</h4>
+
+                                <p class="text-gray-400 text-sm">Oft sind die spezifischen Fragen im Anhang ("Appendix") der Paper oder in separaten Methoden-Artikeln zu finden.</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <!-- Grafik rechts (Verlinkt zur Bib-Suche) -->
+
+                    <div class="lg:w-1/2 fade-up flex justify-center" style="animation-delay: 0.5s;">
+
+                        <div class="relative w-full max-w-md">
+
+                            <div class="absolute inset-0 bg-cyan-500 blur-3xl opacity-20 rounded-full"></div>
+
+                            <a href="https://bib-discover.bib.h-brs.de/discovery/search?vid=49HBZ_BRS:1044" target="_blank" class="glass p-8 rounded-full aspect-square flex flex-col items-center justify-center text-center border border-cyan-500/30 hover:bg-cyan-900/30 hover:scale-105 transition-all cursor-pointer block">
+
+                                <svg class="w-16 h-16 text-cyan-400 mb-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+
+                                <h3 class="text-2xl font-bold text-white mb-2">Theorie-Fundament</h3>
+
+                                <p class="text-gray-400 text-sm max-w-xs mx-auto">Eine starke Forschung basiert immer auf den Erkenntnissen (und validierten Messinstrumenten) früherer Studien.<br><br><span class="text-cyan-400 text-xs font-semibold uppercase">Hier Literatur suchen &rarr;</span></p>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SLIDE 18: AUSWERTUNG ================= -->
 
         <section class="slide" id="slide-18">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <h2 class="text-5xl font-bold text-white mb-12">Literaturrecherche</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div class="space-y-4">
-                        <div class="glass p-5 rounded-xl border-l-4 border-blue-500">Datenbanken (Scholar, PubMed)</div>
-                        <div class="glass p-5 rounded-xl border-l-4 border-cyan-500">Validierte Skalen</div>
+
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+
+                    <div class="w-full md:w-1/2">
+
+                        <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-4">Das Handwerkszeug III</p>
+
+                        <h2 class="fade-up text-5xl font-bold text-white mb-8" style="animation-delay: 0.1s;">Data Science ohne Kopfschmerzen.</h2>
+
+                        <p class="fade-up text-xl text-gray-300 mb-8" style="animation-delay: 0.3s;">
+
+                            <strong>Begin with the end in mind:</strong> Bevor der Fragebogen in die Unternehmen geht, planen wir die Auswertung. Kann dieser Fragebogen unsere Forschungsfrage überhaupt (statistisch) beantworten?
+
+                        </p>
+
+                        <ul class="fade-up space-y-4 text-lg text-gray-400" style="animation-delay: 0.5s;">
+
+                            <li class="flex items-center gap-3"><svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Wir testen vorab mit Dummy-Daten (T-Test, ANOVA).</li>
+
+                            <li class="flex items-center gap-3"><svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Unser Tool der Wahl: <strong class="text-white text-xl ml-1">Jamovi</strong></li>
+
+                            <li class="flex items-center gap-3"><svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Die Power von R in einem modernen Dashboard.</li>
+
+                        </ul>
+
                     </div>
-                    <div class="glass p-8 rounded-full aspect-square flex flex-col items-center justify-center text-center">
-                        <h3 class="text-2xl font-bold text-white">Theorie-Fundament</h3>
-                        <p class="text-cyan-400 text-xs mt-4">BIBLIOTHEK H-BRS</p>
+
+                    <div class="w-full md:w-1/2 fade-up" style="animation-delay: 0.6s;">
+
+                        <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
+
+                            <div class="h-8 bg-slate-900 flex items-center px-4 gap-2">
+
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div>
+
+                                <span class="text-xs text-gray-500 ml-4">jamovi - Vorab-Test.omv</span>
+
+                            </div>
+
+                            <div class="flex h-64">
+
+                                <div class="w-1/3 border-r border-slate-700 p-4">
+
+                                    <div class="h-4 bg-slate-700 rounded w-full mb-3"></div>
+
+                                    <div class="h-4 bg-slate-700 rounded w-5/6 mb-3"></div>
+
+                                    <div class="h-4 bg-slate-700 rounded w-4/6 mb-3"></div>
+
+                                </div>
+
+                                <div class="w-2/3 p-4 bg-slate-100 flex flex-col justify-center items-center">
+
+                                    <div class="w-48 h-32 bg-white shadow rounded flex items-end justify-between p-4 gap-2">
+
+                                        <div class="w-full bg-cyan-500 h-1/2 rounded-t"></div>
+
+                                        <div class="w-full bg-blue-500 h-full rounded-t"></div>
+
+                                    </div>
+
+                                    <p class="text-xs text-slate-500 mt-2 font-mono">ANOVA (Pre vs. Post Dummy)</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
+
+
+        <!-- ================= SLIDE 19: KONKRETER ZEITPLAN ================= -->
 
         <section class="slide" id="slide-19">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <h2 class="text-5xl font-bold text-white mb-12">Data Science & Jamovi</h2>
-                <div class="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow-2xl p-12">
-                    <p class="text-2xl text-gray-300">Planung der Auswertung (T-Test, ANOVA) mit Dummy-Daten vor Feldstart.</p>
+
+                <div class="flex justify-between items-end mb-8">
+
+                    <div>
+
+                        <p class="fade-up text-cyan-400 font-semibold tracking-widest uppercase text-sm mb-2">Projektmanagement</p>
+
+                        <h2 class="fade-up text-4xl lg:text-5xl font-bold text-white" style="animation-delay: 0.1s;">Der verbindliche Zeitplan</h2>
+
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4">
+
+                        <a href="https://h-brs.webex.com/h-brs/j.php?MTID=m4bcb9e556d4beb23cafb36b6e121f76c" target="_blank" class="fade-up flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-xl font-semibold transition-colors shadow-lg shadow-blue-500/20" style="animation-delay: 0.2s;">
+
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+
+                            Am Meeting teilnehmen
+
+                        </a>
+
+                        <button onclick="downloadICS()" class="fade-up flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-500 text-white px-5 py-3 rounded-xl font-semibold transition-colors shadow-lg shadow-cyan-500/20" style="animation-delay: 0.2s;">
+
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11v6m-3-3h6"></path></svg>
+
+                            In Kalender importieren
+
+                        </button>
+
+                    </div>
+
                 </div>
+
+                
+
+                <div class="fade-up w-full overflow-y-auto max-h-[60vh] dark-scroll rounded-2xl border border-slate-700 bg-slate-900/50 backdrop-blur-md shadow-2xl" style="animation-delay: 0.3s;">
+
+                    <table class="w-full text-left border-collapse text-sm lg:text-base">
+
+                        <thead>
+
+                            <tr class="bg-slate-800 text-gray-300 font-bold tracking-wider uppercase text-xs sticky top-0 z-10 shadow-md">
+
+                                <th class="p-4 border-b border-slate-700 w-24">Datum</th>
+
+                                <th class="p-4 border-b border-slate-700 w-24 text-center">Modus</th>
+
+                                <th class="p-4 border-b border-slate-700 w-1/3">Meilenstein & Tagesziel</th>
+
+                                <th class="p-4 border-b border-slate-700">Fokus / Deliverable</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody class="text-gray-300 divide-y divide-slate-800/50">
+
+                            <!-- 13.04. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">13.04.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-red-400" title="Vor Ort" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Kennenlernen, Einführung und Gruppeneinteilung</td>
+
+                                <td class="p-4 text-gray-400">Vorstellung, Kennenlernen, Aufgabenübersicht, Rollenverteilung.</td>
+
+                            </tr>
+
+                            <!-- 20.04. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">20.04.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-blue-400" title="Digital" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Theoretische Fundierung</td>
+
+                                <td class="p-4 text-gray-400">Recherche zu Stress, Change & Neurobiologie. Auswahl valider Skalen.</td>
+
+                            </tr>
+
+                            <!-- 27.04. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">27.04.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-red-400" title="Vor Ort" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Vorstellung der Forschungsdesign-Idee</td>
+
+                                <td class="p-4 text-gray-400">Festlegung des Designs (z.B. Waitlist-Control). Entwicklung Storyline für Pitch.</td>
+
+                            </tr>
+
+                            <!-- 04.05. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">04.05.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-blue-400" title="Digital" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Pitch-Deck Entwurf</td>
+
+                                <td class="p-4 text-gray-400">Design und Strukturierung des Pitch-Decks für die Unternehmensakquise.</td>
+
+                            </tr>
+
+                            <!-- 11.05. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors bg-cyan-900/10 border-l-4 border-cyan-500">
+
+                                <td class="p-4 font-mono text-cyan-400 font-bold">11.05.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-red-400" title="Vor Ort" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white text-cyan-400">Vorstellung des Pitch-Decks</td>
+
+                                <td class="p-4 text-gray-300 font-medium">brainLight digital dazugeschaltet. Abgabe der Verkaufsunterlagen.</td>
+
+                            </tr>
+
+                            <!-- 18.05. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">18.05.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-blue-400" title="Digital" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Recherche von Fragebögen</td>
+
+                                <td class="p-4 text-gray-400">Suche und Evaluation konkreter Items für die Online-Erhebung.</td>
+
+                            </tr>
+
+                            <!-- 01.06. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors bg-cyan-900/10 border-l-4 border-cyan-500">
+
+                                <td class="p-4 font-mono text-cyan-400 font-bold">01.06.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-red-400" title="Vor Ort" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white text-cyan-400">Präsentation der Fragebögen</td>
+
+                                <td class="p-4 text-gray-300 font-medium">Besuch Benjamin Klenke (Externer Experte): Review der Fragebögen. Start des technischen Aufbaus.</td>
+
+                            </tr>
+
+                            <!-- 08.06. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">08.06.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-blue-400" title="Digital" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Technical Build</td>
+
+                                <td class="p-4 text-gray-400">Programmierung (z.B. Lamapoll). Erstellung Datenschutzkonzept.</td>
+
+                            </tr>
+
+                            <!-- 15.06. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">15.06.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-red-400" title="Vor Ort" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Pre-Test der Fragebögen</td>
+
+                                <td class="p-4 text-gray-400">Finaler Check. Festlegung der Auswertungsmethodik (Dummy-Daten).</td>
+
+                            </tr>
+
+                            <!-- 22.06. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors">
+
+                                <td class="p-4 font-mono text-cyan-400">22.06.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-blue-400" title="Digital" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></td>
+
+                                <td class="p-4 font-bold text-white">Erstellung Ergebnispräsentation</td>
+
+                                <td class="p-4 text-gray-400">Zusammenfassung der Studienergebnisse für den finalen Pitch.</td>
+
+                            </tr>
+
+                            <!-- 29.06. -->
+
+                            <tr class="hover:bg-slate-800/30 transition-colors opacity-70">
+
+                                <td class="p-4 font-mono text-gray-500">29.06.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-gray-500" title="Frei" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg></td>
+
+                                <td class="p-4 font-bold text-gray-400">Frei / Puffer</td>
+
+                                <td class="p-4 text-gray-500">Puffer für Erstellung Ergebnispräsentation / Generalprobe.</td>
+
+                            </tr>
+
+                            <!-- 06.07. -->
+
+                            <tr class="bg-gradient-to-r from-cyan-900/40 to-blue-900/40 border-l-4 border-blue-500">
+
+                                <td class="p-4 font-mono text-white font-bold">06.07.</td>
+
+                                <td class="p-4 flex justify-center"><svg class="w-6 h-6 text-yellow-400" title="Vor Ort" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg></td>
+
+                                <td class="p-4 font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">THE GRAND PITCH</td>
+
+                                <td class="p-4 text-gray-200 font-medium">Präsentation vor Ursula Sauer (brainLight) und Benjamin Klenke. Entscheidung.</td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
             </div>
+
         </section>
+
+
+        <!-- ================= SLIDE 20: QUELLEN ================= -->
 
         <section class="slide" id="slide-20">
+
             <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <h2 class="text-5xl font-bold text-white mb-12">Verbindlicher Zeitplan</h2>
-                <div class="overflow-y-auto dark-scroll glass p-1 rounded-2xl border border-slate-700">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-800 sticky top-0"><tr class="text-xs uppercase text-cyan-400">
-                            <th class="p-4">Datum</th><th class="p-4">Meilenstein</th></tr></thead>
-                        <tbody class="divide-y divide-slate-800">
-                            <tr><td class="p-4">11.05.</td><td class="p-4 text-white">Vorstellung Pitch-Deck</td></tr>
-                            <tr class="bg-cyan-900/10"><td class="p-4 font-bold text-white">06.07.</td><td class="p-4 font-black text-white">THE GRAND PITCH</td></tr>
-                        </tbody>
-                    </table>
+
+                <h2 class="fade-up text-4xl font-bold text-white mb-10 border-b border-slate-700 pb-4 text-center" style="animation-delay: 0.1s;">Literaturverzeichnis & Quellen</h2>
+
+                
+
+                <!-- Format: Chicago Style, Font: Montserrat -->
+
+                <div class="fade-up space-y-6 text-gray-400 text-sm leading-relaxed max-w-5xl mx-auto w-full overflow-y-auto pr-4 dark-scroll max-h-[60vh]" style="animation-delay: 0.3s;">
+
+                    <p class="pl-8 -indent-8" id="source-1">
+
+                        <span class="text-cyan-500 font-bold mr-2">[1]</span> Avey, James B., Tara S. Wernsing, and Fred Luthans. "Can positive employees help positive organizational change? Impact of psychological capital and emotions on relevant attitudes and behaviors." <i>The Journal of Applied Behavioral Science</i> 44, no. 1 (2008): 48-70.
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-2">
+
+                        <span class="text-cyan-500 font-bold mr-2">[2]</span> Handelsblatt. "Acht Thesen zur Zukunft des Change-Managements." <i>Handelsblatt LIVE / ChangeCongress</i>. November 2024. <a href="https://live.handelsblatt.com/acht-thesen-zur-zukunft-des-change-managements/" class="text-cyan-500 hover:underline">https://live.handelsblatt.com/...</a>
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-3">
+
+                        <span class="text-cyan-500 font-bold mr-2">[3]</span> Hughes, Mark. "Do 70 per cent of all organizational change initiatives really fail?." <i>Journal of Change Management</i> 11, no. 4 (2011): 451-464.
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-4">
+
+                        <span class="text-cyan-500 font-bold mr-2">[4]</span> Kübler-Ross, Elisabeth. <i>On Death and Dying</i>. New York: Macmillan, 1969.
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-5">
+
+                        <span class="text-cyan-500 font-bold mr-2">[5]</span> Janssen, Claes. <i>The Four Rooms of Change</i>. Stockholm: Wahlström & Widstrand, 1996.
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-6">
+
+                        <span class="text-cyan-500 font-bold mr-2">[6]</span> Kabat-Zinn, Jon. <i>Wherever You Go, There You Are: Mindfulness Meditation in Everyday Life</i>. New York: Hyperion, 1994.
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-7">
+
+                        <span class="text-cyan-500 font-bold mr-2">[7]</span> Ghadiri, Argang, Joachim Prinz, Theo Peters, and Axel Kowalski. "Beitrag von inhaltlich gestalteten Arbeitspausen für das betriebliche Gesundheitsmanagement: Eine empirische Untersuchung der Konzentrations- und Entspannungswirkung ausgewählter Interventionen." (2014).
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-8">
+
+                        <span class="text-cyan-500 font-bold mr-2">[8]</span> Ghadiri, Argang, Leonie S. Kaiser, and Theo Peters. "The Effect of Audio-Visual Relaxation on Work Engagement and Burnout Symptoms." <i>International Journal of Environmental Research and Public Health</i> 19, no. 5 (2022): 2589.
+
+                    </p>
+
+                    <p class="pl-8 -indent-8" id="source-9">
+
+                        <span class="text-cyan-500 font-bold mr-2">[9]</span> Microsoft Corporation Case Study. "Transformation and Growth Mindset." <i>Harvard Business Publishing</i>. 2023.
+
+                    </p>
+
                 </div>
+
             </div>
+
         </section>
 
-        <section class="slide" id="slide-21">
-            <div class="relative z-10 flex flex-col h-full justify-center p-12 md:p-24 w-full max-w-[90vw]">
-                <h2 class="text-4xl font-bold text-white mb-10 border-b border-slate-700 pb-4">Quellen</h2>
-                <div class="space-y-4 text-gray-400 text-sm overflow-y-auto dark-scroll max-h-[60vh]">
-                    <p>[1] Avey et al. (2008): Impact of psychological capital on positive organizational change.</p>
-                    <p>[2] Handelsblatt (2024): Acht Thesen zur Zukunft des Change-Managements.</p>
-                    <p>[4] Kübler-Ross (1969): On Death and Dying.</p>
-                    <p>[8] Ghadiri et al. (2022): Effect of Audio-Visual Relaxation on Work Engagement.</p>
-                </div>
-            </div>
-        </section>
 
         <!-- Navigation Controls -->
+
         <div class="fixed bottom-6 right-8 z-50 flex gap-4 items-center">
-            <div class="h-12 px-5 rounded-full glass flex items-center justify-center text-gray-400 font-mono text-sm border border-slate-700">
-                <span id="current-slide-num" class="text-white font-bold mr-1">1</span> / 21
+
+            <!-- Slide Counter as a Button Component -->
+
+            <div class="h-12 px-5 rounded-full glass flex items-center justify-center text-gray-400 font-mono text-sm shadow-lg border border-slate-700">
+
+                <span id="current-slide-num" class="text-white font-bold mr-1">1</span> / 20
+
             </div>
-            <button id="prev-slide" class="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-slate-800 border border-slate-700 shadow-lg">
+
+            
+
+            <button id="prev-slide" class="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:bg-slate-800 transition-colors disabled:opacity-30 border border-slate-700 shadow-lg">
+
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+
             </button>
-            <button id="next-slide" class="w-12 h-12 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white flex items-center justify-center shadow-lg transition-colors">
+
+            <button id="next-slide" class="w-12 h-12 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white flex items-center justify-center shadow-lg shadow-cyan-500/20 transition-colors disabled:opacity-30">
+
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+
             </button>
+
         </div>
+
 
     </div>
 
+
+    <!-- Application Logic -->
+
     <script>
+
         const slides = document.querySelectorAll('.slide');
+
         const progressBar = document.getElementById('progress-bar');
+
         const prevBtn = document.getElementById('prev-slide');
+
         const nextBtn = document.getElementById('next-slide');
+
         const counter = document.getElementById('current-slide-num');
+
         let currentSlide = 0;
 
+
         function updateSlides() {
+
             slides.forEach((slide, index) => {
+
                 slide.classList.toggle('active', index === currentSlide);
+
             });
+
+            
+
+            // Progress Bar Update
+
             const progress = (currentSlide / (slides.length - 1)) * 100;
-            if (progressBar) progressBar.style.width = `${progress}%`;
-            if (counter) counter.innerText = currentSlide + 1;
+
+            progressBar.style.width = `${progress}%`;
+
+            
+
+            // Page Number Update
+
+            if (counter) {
+
+                counter.innerText = currentSlide + 1;
+
+            }
+
+
+            // Disable buttons at edges
+
             prevBtn.disabled = currentSlide === 0;
+
             nextBtn.disabled = currentSlide === slides.length - 1;
+
         }
+
 
         prevBtn.addEventListener('click', () => { if(currentSlide > 0) { currentSlide--; updateSlides(); } });
+
         nextBtn.addEventListener('click', () => { if(currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } });
 
-        window.gotoSlide = function(num) { currentSlide = num - 1; updateSlides(); }
+
+        // Global Navigation function (used by citation links)
+
+        window.gotoSlide = function(slideNumber) {
+
+            // Arrays are 0-indexed, so slide 20 is index 19
+
+            currentSlide = slideNumber - 1;
+
+            if (currentSlide < 0) currentSlide = 0;
+
+            if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+
+            updateSlides();
+
+        };
+
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space') { if(currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } }
-            else if (e.key === 'ArrowLeft') { if(currentSlide > 0) { currentSlide--; updateSlides(); } }
+
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            
+
+            if (e.key === 'ArrowRight' || e.key === 'Space') { 
+
+                if(currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } 
+
+            }
+
+            else if (e.key === 'ArrowLeft') { 
+
+                if(currentSlide > 0) { currentSlide--; updateSlides(); } 
+
+            }
+
         });
 
-        function showVuca(type) {
-            document.getElementById('vuca-image').classList.add('opacity-0');
-            document.getElementById('vuca-texts').classList.remove('opacity-0');
-            ['volatility', 'uncertainty', 'complexity', 'ambiguity'].forEach(t => document.getElementById(`text-${t}`).classList.add('hidden'));
-            document.getElementById(`text-${type}`).classList.remove('hidden');
-        }
-
-        function hideVuca() {
-            document.getElementById('vuca-image').classList.remove('opacity-0');
-            document.getElementById('vuca-texts').classList.add('opacity-0');
-        }
+        
 
         updateSlides();
+
+
+        // --- VUCA Interaction Logic ---
+
+        function showVuca(type) {
+
+            const vucaImage = document.getElementById('vuca-image');
+
+            const vucaTexts = document.getElementById('vuca-texts');
+
+            if (vucaImage) {
+
+                vucaImage.classList.remove('opacity-100');
+
+                vucaImage.classList.add('opacity-0');
+
+            }
+
+            if (vucaTexts) {
+
+                vucaTexts.classList.remove('opacity-0');
+
+                vucaTexts.classList.add('opacity-100');
+
+            }
+
+            
+
+            ['volatility', 'uncertainty', 'complexity', 'ambiguity'].forEach(t => {
+
+                const textEl = document.getElementById(`text-${t}`);
+
+                if(textEl) textEl.classList.add('hidden');
+
+            });
+
+            const activeEl = document.getElementById(`text-${type}`);
+
+            if(activeEl) activeEl.classList.remove('hidden');
+
+        }
+
+
+        function hideVuca() {
+
+            const vucaImage = document.getElementById('vuca-image');
+
+            const vucaTexts = document.getElementById('vuca-texts');
+
+            if (vucaImage) {
+
+                vucaImage.classList.remove('opacity-0');
+
+                vucaImage.classList.add('opacity-100');
+
+            }
+
+            if (vucaTexts) {
+
+                vucaTexts.classList.remove('opacity-100');
+
+                vucaTexts.classList.add('opacity-0');
+
+            }
+
+        }
+
+
+        // --- ICS Calendar Export Logic ---
+
+        function downloadICS() {
+
+            // Hilfsfunktion für korrekte ICS Zeitformate (CEST 15:15 -> UTC 13:15)
+
+            // Beachte: Umstellung Sommerzeit. Einfachheitshalber fix auf 13:15 UTC (15:15 CEST)
+
+            const formatICSDate = (day, month, year) => `${year}${month}${day}T131500Z`;
+
+            const formatICSEnd = (day, month, year) => `${year}${month}${day}T151500Z`;
+
+            
+
+            const meetLink = "https://h-brs.webex.com/h-brs/j.php?MTID=m4bcb9e556d4beb23cafb36b6e121f76c";
+
+            
+
+            const events = [
+
+                { d: "13", m: "04", y: "2026", isDigital: false, title: "Kennenlernen, Einführung und Gruppeneinteilung", desc: "Intro durch Prof. & brainLight. Bildung von Gruppe A & B. Rollenverteilung." },
+
+                { d: "20", m: "04", y: "2026", isDigital: true, title: "Theoretische Fundierung", desc: "Recherche zu Stress, Change & Neurobiologie. Auswahl valider Skalen." },
+
+                { d: "27", m: "04", y: "2026", isDigital: false, title: "Vorstellung Forschungsdesign", desc: "Festlegung des Designs. Entwicklung Storyline für Pitch." },
+
+                { d: "04", m: "05", y: "2026", isDigital: true, title: "Pitch-Deck Entwurf", desc: "Design und Strukturierung des Pitch-Decks." },
+
+                { d: "11", m: "05", y: "2026", isDigital: false, title: "Vorstellung Pitch-Deck", desc: "brainLight digital dazugeschaltet. Abgabe der Verkaufsunterlagen." },
+
+                { d: "18", m: "05", y: "2026", isDigital: true, title: "Recherche Fragebögen", desc: "Suche und Evaluation konkreter Items." },
+
+                { d: "01", m: "06", y: "2026", isDigital: false, title: "Präsentation Fragebögen", desc: "Review mit Benjamin Klenke (Externer Experte). Start des technischen Aufbaus." },
+
+                { d: "08", m: "06", y: "2026", isDigital: true, title: "Technical Build", desc: "Programmierung Lamapoll. Datenschutzkonzept." },
+
+                { d: "15", m: "06", y: "2026", isDigital: false, title: "Pre-Test Fragebögen", desc: "Finaler Check. Auswertungsmethodik (Dummy-Daten)." },
+
+                { d: "22", m: "06", y: "2026", isDigital: true, title: "Erstellung Ergebnispräsentation", desc: "Zusammenfassung der Studienergebnisse für den finalen Pitch." },
+
+                { d: "29", m: "06", y: "2026", isDigital: false, title: "Frei / Puffer", desc: "Puffer für Erstellung Ergebnispräsentation / Generalprobe." },
+
+                { d: "06", m: "07", y: "2026", isDigital: false, title: "THE GRAND PITCH", desc: "Finale Präsentation vor Ursula Sauer (brainLight) und Benjamin Klenke." }
+
+            ];
+
+
+            let icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//FlowForward//Calendar//DE\nCALSCALE:GREGORIAN\n";
+
+            
+
+            events.forEach(ev => {
+
+                icsContent += "BEGIN:VEVENT\n";
+
+                icsContent += `DTSTART:${formatICSDate(ev.d, ev.m, ev.y)}\n`;
+
+                icsContent += `DTEND:${formatICSEnd(ev.d, ev.m, ev.y)}\n`;
+
+                icsContent += `SUMMARY:FlowForward: ${ev.title}\n`;
+
+                
+
+                let descText = ev.desc;
+
+                if (ev.isDigital) {
+
+                    descText += `\\n\\nOnline Meeting: ${meetLink}`;
+
+                    icsContent += `LOCATION:${meetLink}\n`;
+
+                }
+
+                
+
+                icsContent += `DESCRIPTION:${descText}\n`;
+
+                icsContent += "END:VEVENT\n";
+
+            });
+
+            
+
+            icsContent += "END:VCALENDAR";
+
+
+            // Download Trigger
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+
+            const link = document.createElement('a');
+
+            link.href = URL.createObjectURL(blob);
+
+            link.download = 'FlowForward_Zeitplan_2026.ics';
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            document.body.removeChild(link);
+
+        }
+
     </script>
+
 </body>
-</html>
+
+</html> 
